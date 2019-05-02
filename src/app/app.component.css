@@ -1,0 +1,12 @@
+.app-body {
+  grid-column-start: m;
+  grid-column-end: k;
+  grid-row-start: m;
+  grid-row-end: k;
+  background-color: white;
+  position: relative;
+}
+
+.pf-c-page .pf-c-page__header {
+  background-color: #151515;
+}

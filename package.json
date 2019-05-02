@@ -1,8 +1,8 @@
 {
-	"name": "webview-example",
-	"description": "Message Minder - A Webview API Sample",
+	"name": "apicurito-editor",
+	"description": "Apicurito Editor for Visual Studio Code",
 	"version": "0.0.1",
-	"publisher": "camel-tooling",
+	"publisher": "apicurio",
 	"engines": {
 		"vscode": "^1.26.0"
 	},
@@ -10,36 +10,72 @@
 		"Other"
 	],
 	"activationEvents": [
-		"onCommand:msgm.start",
-		"onCommand:msgm.sendMessage",
-		"onWebviewPanel:msgm"
+		"onLanguage:json"
 	],
-	"main": "./out/extension.js",
+	"main": "./dist/src-ext/extension.js",
 	"contributes": {
 		"commands": [
 			{
-				"command": "msgm.start",
-				"title": "Start message minder session",
-				"category": "Message Minder"
-			},
-			{
-				"command": "msgm.sendMessage",
-				"title": "Send message to running message minder session",
-				"category": "Message Minder"
+				"command": "apicurito.start",
+				"title": "Open in Apicurito editor",
+				"category": "Apicurito"
 			}
-		]
+		],
+		"menus": {
+			"explorer/context": [
+				{
+					"when": "resourceLangId == json",
+					"command": "apicurito.start",
+					"group": "Apicurito"
+				}
+			]
+		}
 	},
 	"scripts": {
-		"vscode:prepublish": "tsc -p ./",
-		"compile": "tsc -p ./",
-		"watch": "tsc -w -p ./",
+		"ng": "ng",
+		"vscode:prepublish": "ng build && tsc -p tsconfig.ext.json",
+		"compile": "ng build && tsc -p tsconfig.ext.json",
 		"postinstall": "node ./node_modules/vscode/bin/install"
 	},
-	"dependencies": {},
+	"dependencies": {
+		"@angular/animations": "7.2.6",
+		"@angular/common": "7.2.6",
+		"@angular/compiler": "7.2.6",
+		"@angular/core": "7.2.6",
+		"@angular/forms": "7.2.6",
+		"@angular/platform-browser": "7.2.6",
+		"@angular/platform-browser-dynamic": "7.2.6",
+		"@angular/router": "7.2.6",
+		"@patternfly/patternfly": "1.0.250",
+		"@types/mousetrap": "~1.6.2",
+		"apicurio-design-studio": "0.2.25",
+		"apicurio-ts-core": "0.1.3",
+		"bootstrap": "3.4.1",
+		"brace": "^0.11.1",
+		"core-js": "2.6.5",
+		"js-yaml": "3.12.2",
+		"marked": "0.6.0",
+		"mousetrap": "~1.6.3",
+		"ngx-bootstrap": "3.2.0",
+		"ngx-clipboard": "11.1.9",
+		"oai-ts-commands": "0.2.62",
+		"oai-ts-core": "0.2.36",
+		"patternfly": "3.59.1",
+		"pluralize": "7.0.0",
+		"rxjs": "6.4.0",
+		"zone.js": "^0.8.28"
+	},
 	"devDependencies": {
-		"@types/node": "^10.5.2",
 		"tslint": "^5.11.0",
-		"typescript": "^2.9.2",
-		"vscode": "^1.1.33"
+		"vscode": "^1.1.33",
+		"@angular-devkit/build-angular": "0.13.3",
+		"@angular/cli": "7.3.3",
+		"@angular/compiler-cli": "7.2.6",
+		"@angular/language-service": "7.2.6",
+		"@types/node": "~8.9.4",
+		"@types/marked": "0.6.0",
+		"protractor": "~5.4.0",
+		"ts-node": "~7.0.0",
+		"typescript": "3.2.4"
 	}
 }
