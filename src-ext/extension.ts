@@ -37,14 +37,11 @@ export class VscodeMessage {
 
 export function activate(context: vscode.ExtensionContext) {
     context.subscriptions.push(
-        vscode.commands.registerCommand('apicurito.start', async () => {
-            let editor = vscode.window.activeTextEditor;
-            if(!editor) {
-                vscode.window.showErrorMessage("To start the Apicurio editor, the target specification file must be opened in the current tab.");
-            } else {
-                let filePath = editor.document.fileName;
+        vscode.commands.registerCommand('apicurito.start', async (node) => {
+            if (node && node.fsPath) {
+                const filePath = node.fsPath;
                 ApicuritoPanelContainer.get(context).createOrShow(filePath);
-            }
+            }            
         })
     );
 }
@@ -72,7 +69,7 @@ class ApicuritoPanelContainer {
     }
 
     public createOrShow(filePath: string): ApicuritoPanel {
-        const column = vscode.window.activeTextEditor ? vscode.window.activeTextEditor.viewColumn : undefined;
+        const column = vscode.window.activeTextEditor ? vscode.window.activeTextEditor.viewColumn : vscode.ViewColumn.Active;
         if (!this.panels[filePath]) {
             this.panels[filePath] = new ApicuritoPanel(this, this.extensionPath, column || vscode.ViewColumn.One, filePath);
         }
