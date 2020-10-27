@@ -20,6 +20,7 @@ import {ApiDefinition} from 'apicurio-design-studio';
 import {WindowRef} from './services/window-ref.service';
 import {AppInfoService} from "./services/app-info.service";
 import { VscodeExtensionService } from './services/vscode-extension.service';
+import * as YAML from 'js-yaml';
 
 declare var acquireVsCodeApi: any;
 declare var window: any;
@@ -55,6 +56,23 @@ export class AppComponent {
         this.apiDef.tags = [];
         this.apiDef.description = '';
         this.apiDef.id = 'api-1';
-        this.apiDef.spec = content;
+        this.apiDef.spec = this.parseContent(content);
     }
+
+    /**
+     * Parses the given content into a JS object.  This should support both JSON and YAML content.  If
+     * parsing fails we should log an error and return null.  That will indicate to any consumers that
+     * there *should* be an entry for the content but that the content failed to be parsed.
+     * @param body
+     */
+    private parseContent(content: any): any {
+        if (typeof content === "object") {
+            return content;
+        }
+        try { return JSON.parse(content); } catch (e) {}
+        try { return YAML.safeLoad(content); } catch (e) {}
+        console.warn("Failed to parse content!");
+        return null;
+    }
+
 }
