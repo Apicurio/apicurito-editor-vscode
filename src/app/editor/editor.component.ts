@@ -22,7 +22,8 @@ import {ConfigService, GeneratorConfig} from "../services/config.service";
 import * as YAML from 'js-yaml';
 import {StorageService} from "../services/storage.service";
 import {IOasValidationSeverityRegistry, OasValidationProblemSeverity} from "oai-ts-core";
-import {VscodeExtensionService, VscodeMessage, MessageHandler} from "../services/vscode-extension.service";
+import {VscodeExtensionService, VscodeMessage} from "../services/vscode-extension.service";
+import {ApiFileEncoding} from "./api-file-encoding.type";
 
 
 export class DisableValidationRegistry implements IOasValidationSeverityRegistry {
@@ -52,6 +53,8 @@ export class EditorComponent {
     get api(): ApiDefinition {
         return this._api;
     }
+    @Input()
+    encoding: ApiFileEncoding;
 
     @Output() onClose: EventEmitter<void> = new EventEmitter<void>();
 
@@ -101,7 +104,15 @@ export class EditorComponent {
     public saveExt() {
         let spec: any = this.apiEditor.getValue().spec;
         if (typeof spec === "object") {
-            spec = JSON.stringify(spec, null, 4);
+            if (this.encoding == ApiFileEncoding.JSON) {
+                spec = JSON.stringify(spec, null, 4);
+            } else if (this.encoding == ApiFileEncoding.YAML) {
+                spec = YAML.safeDump(spec, {
+                    indent: 4,
+                    lineWidth: 110,
+                    noRefs: true
+                });
+            }
             this.vscodeExtension.sendMessage(new VscodeMessage("save-req", spec));
         }
     }
