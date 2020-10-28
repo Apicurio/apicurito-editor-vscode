@@ -18,11 +18,9 @@
 
 import {Injectable} from "@angular/core";
 import {WindowRef} from "./window-ref.service";
-import {ApiDefinition} from "apicurio-design-studio";
 import {bind as mousetrap_bind} from 'mousetrap';
 
 declare var acquireVsCodeApi: any; // GLOBAL
-declare var Mousetrap: any;
 export class VscodeMessage {
 
     public type: string;
