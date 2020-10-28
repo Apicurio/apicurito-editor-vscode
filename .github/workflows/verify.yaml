@@ -1,0 +1,39 @@
+name: Verify Build
+on:
+  workflow_dispatch: {}
+  push:
+    paths-ignore:
+      - '.github/**'
+      - '.gitignore'
+      - 'LICENSE'
+      - 'README*'
+      - 'CODE_OF_CONDUCT*'
+    branches: [master]
+  pull_request:
+    paths-ignore:
+      - '.github/**'
+      - '.gitignore'
+      - 'LICENSE'
+      - 'README*'
+      - 'CODE_OF_CONDUCT*'
+    branches: [master]
+
+jobs:
+  build-verify:
+    name: Verify Build
+    runs-on: ubuntu-latest
+    if: github.repository_owner == 'Apicurio'
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v2
+      - name: Set up Node.js v10
+        uses: actions/setup-node@v1
+        with:
+          node-version: 10
+      - name: Install VSCE
+        run: npm install -g vsce
+      - name: Build Project
+        run: |
+          yarn install
+          yarn run compile
+          vsce package -o apicurito-editor.vsix
