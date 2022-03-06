@@ -175,6 +175,7 @@ class ApicuritoPanel {
 
             <meta name="viewport" content="width=device-width, initial-scale=1">
             <link rel="icon" type="image/x-icon" href="favicon.ico">
+            <link rel="stylesheet" href="./styles.css">
 
             <script type="text/javascript" src="./version.js"></script>
             <script type="text/javascript" src="./config/config.js"></script>
@@ -199,7 +200,6 @@ class ApicuritoPanel {
         <script nonce="${nonce}" type="text/javascript" src="runtime.js"></script>
         <script nonce="${nonce}" type="text/javascript" src="es2015-polyfills.js" nomodule></script>
         <script nonce="${nonce}" type="text/javascript" src="polyfills.js"></script>
-        <script nonce="${nonce}" type="text/javascript" src="styles.js"></script>
         <script nonce="${nonce}" type="text/javascript" src="scripts.js"></script>
         <script nonce="${nonce}" type="text/javascript" src="vendor.js"></script>
         <script nonce="${nonce}" type="text/javascript" src="main.js"></script>
