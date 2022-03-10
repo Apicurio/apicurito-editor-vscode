@@ -33,6 +33,7 @@ import {ConfigService} from './services/config.service';
 import {StorageService} from "./services/storage.service";
 import {ConfigureValidationComponent} from "./editor/configure-validation.dialog";
 import { VscodeExtensionService } from './services/vscode-extension.service';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
     imports: [
@@ -42,7 +43,8 @@ import { VscodeExtensionService } from './services/vscode-extension.service';
         ApicurioEditorModule,
         ApicurioCommonComponentsModule,
         ModalModule.forRoot(),
-        BsDropdownModule.forRoot()
+        BsDropdownModule.forRoot(),
+        BrowserAnimationsModule
     ],
     declarations: [
         AppComponent,
