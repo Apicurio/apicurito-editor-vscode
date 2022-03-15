@@ -26,10 +26,10 @@ jobs:
     steps:
       - name: Checkout Code
         uses: actions/checkout@v2
-      - name: Set up Node.js v10
+      - name: Set up Node.js v16
         uses: actions/setup-node@v1
         with:
-          node-version: 10
+          node-version: 16
       - name: Install VSCE
         run: npm install -g vsce
       - name: Build Project
