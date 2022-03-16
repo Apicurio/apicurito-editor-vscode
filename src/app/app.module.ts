@@ -20,7 +20,8 @@ import {NgModule} from '@angular/core';
 import {ApicurioCommonComponentsModule, ApicurioEditorModule} from 'apicurio-design-studio';
 
 import {AppComponent} from './app.component';
-import {BsDropdownModule, ModalModule} from 'ngx-bootstrap';
+import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
+import { ModalModule } from 'ngx-bootstrap/modal';
 import {FormsModule} from '@angular/forms';
 import {WindowRef} from './services/window-ref.service';
 import {EmptyStateComponent} from "./empty/empty-state.component";
@@ -32,6 +33,7 @@ import {ConfigService} from './services/config.service';
 import {StorageService} from "./services/storage.service";
 import {ConfigureValidationComponent} from "./editor/configure-validation.dialog";
 import { VscodeExtensionService } from './services/vscode-extension.service';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
     imports: [
@@ -41,7 +43,8 @@ import { VscodeExtensionService } from './services/vscode-extension.service';
         ApicurioEditorModule,
         ApicurioCommonComponentsModule,
         ModalModule.forRoot(),
-        BsDropdownModule.forRoot()
+        BsDropdownModule.forRoot(),
+        BrowserAnimationsModule
     ],
     declarations: [
         AppComponent,
